@@ -23,7 +23,7 @@ fastify.post('/lowercase', (request, reply) => {
 });
 
 fastify.get('/user/:id', (request, reply) => {
-  const {id = 0} = request.query;
+  const {id = 0} = request.params;
 
   if (id in users) {
     reply.send(users[id]);
