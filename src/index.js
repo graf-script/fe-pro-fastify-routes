@@ -23,7 +23,7 @@ fastify.post('/lowercase', (request, reply) => {
 });
 
 fastify.get('/user/:id', (request, reply) => {
-  const {id = 0} = request.params;
+  const {id = 0} = request.query;
 
   if (id in users) {
     reply.send(users[id]);
@@ -35,12 +35,12 @@ fastify.get('/user/:id', (request, reply) => {
 fastify.get('/users', (request, reply) => {
   const { filter, value } = request.query;
   const result = Object.values(users).filter((users) => {
-    return users[filter] === value;
+    return users[filter] === +value || users[filter] === value;
   });
-  reply.send(result);
-  if (value === undefined) {
-    return Object.values(users);
+  if (+value === undefined || value === undefined) {
+    return Object.values( users );
   }
+  reply.send(result);
 });
 
 
