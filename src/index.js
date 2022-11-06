@@ -6,7 +6,7 @@ const fastify = Fastify({
   logger: true,
 });
 
-server.post('/uppercase', (request, reply) => {
+fastify.post('/uppercase', (request, reply) => {
   if (request.body.toLowerCase().includes('fuck')) {
     reply.status(403).send('unresolved');
   } else {
@@ -14,7 +14,7 @@ server.post('/uppercase', (request, reply) => {
   }
 });
 
-server.post('/lowercase', (request, reply) => {
+fastify.post('/lowercase', (request, reply) => {
   if (request.body.toLowerCase().includes('fuck')) {
     reply.status(403).send('unresolved');
   } else {
@@ -22,7 +22,7 @@ server.post('/lowercase', (request, reply) => {
   }
 });
 
-server.get('/user/:id', (request, reply) => {
+fastify.get('/user/:id', (request, reply) => {
   const {id = 0} = request.params;
 
   if (id in users) {
@@ -32,7 +32,7 @@ server.get('/user/:id', (request, reply) => {
   }
 });
 
-server.get('/users', (request, reply) => {
+fastify.get('/users', (request, reply) => {
   const {filter, value} = request.query;
   const result = Object.values(users).filter(({ value }) => {
     return filter && value;
