@@ -33,13 +33,16 @@ fastify.get('/user/:id', (request, reply) => {
 });
 
 fastify.get('/users', (request, reply) => {
-  const {filter, value} = request.query;
-  const result = Object.values(users).filter(({ value }) => {
-    return filter && value;
+  const { filter, value } = request.query;
+  const result = Object.values(users).filter((users) => {
+    if (users[filter] === value) {
+      return users[filter];
+    }
   })
-
   reply.send(result);
 });
+
+
 fastify.register(import('@fastify/cors'));
 fastify.register(import('@fastify/multipart'), {
   addToBody: true,
