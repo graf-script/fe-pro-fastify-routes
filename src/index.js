@@ -35,11 +35,12 @@ fastify.get('/user/:id', (request, reply) => {
 fastify.get('/users', (request, reply) => {
   const { filter, value } = request.query;
   const result = Object.values(users).filter((users) => {
-    if (users[filter] === value) {
-      return [users];
-    }
-  })
+    return users[filter] === value;
+  });
   reply.send(result);
+  if (value === undefined) {
+    return Object.values(users);
+  }
 });
 
 
