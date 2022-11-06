@@ -38,7 +38,7 @@ fastify.get('/users', (request, reply) => {
     return users[filter] === +value || users[filter] === value;
   });
   if (+value === undefined || value === undefined) {
-    return Object.values( users );
+    return Object.values(users);
   }
   reply.send(result);
 });
