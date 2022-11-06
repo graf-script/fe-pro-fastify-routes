@@ -28,7 +28,7 @@ fastify.get('/user/:id', (request, reply) => {
   if (id in users) {
     reply.send(users[id]);
   } else {
-    reply.status(404).send('User not exist');
+    reply.status(400).send('User not exist');
   }
 });
 
